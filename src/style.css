@@ -1,0 +1,13 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+.loading {
+  width: 100vw;
+  height: 100vh;
+  background-color: #756646;
+  color: #132488;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Suspense } from "react";
 
-function App() {
+import data from './Data/data.json';
+
+import './style.css';
+
+
+const Table = lazy( async () => {
+  const values = await Promise.all([import('./Components/Table'), debounce()]);
+  return values[0];
+});
+
+const debounce = () => {
+  const promise = new Promise((resolve,reject) => {
+    const timeoutId = setTimeout(()=>{
+      clearTimeout(timeoutId);
+      resolve();
+    },2000)
+  })
+  return promise;
+}
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Suspense fallback={<div className="loading">Loading...</div>}>
+        <Table data = {data} />
+      </Suspense>
     </div>
   );
 }
-
-export default App;
