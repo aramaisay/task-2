@@ -11,3 +11,59 @@
   align-items: center;
   justify-content: center;
 }
+.loader {
+  height: 5.5rem;
+  width: 5.5rem;
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  border-radius: 2rem;
+  background-color: #778899;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.plusCont {
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.plusImg {
+  width: 80%;
+  height: 80%;
+}
+.tableCont {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-flow: column wrap;
+}
+.rowCont {
+  width: 80%;
+  min-height: 10.75rem;
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+}
+.headerCont {
+  color: white;
+  background-color:rgba(0,0,0,0.25);
+}
+.colCont {
+  height: 5rem;
+  width: 5rem;
+  padding: 0.5rem 1rem;
+  margin: 1rem 1rem;
+  border: 0.125rem black solid;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.colInput {
+  width: 80%;
+  background-color: rgba(0,0,0,0);
+  border: none;
+  outline: none;
+}
