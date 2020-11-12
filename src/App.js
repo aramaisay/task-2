@@ -1,6 +1,7 @@
-import React, { lazy, Suspense, useReducer } from "react";
+import React, { lazy, Suspense, useReducer, useCallback, Profiler } from "react";
 
 import useDebounce from "./Hooks/useDebouce";
+import useProfilerCallback from "./Hooks/useProfilerCallback";
 
 import rawData from './Data/data.json';
 import './style.css';
@@ -13,7 +14,10 @@ const Table = lazy( async () => {
 });
 
 export default function App() {
-  const reducer = (state, action) => {
+  
+  const {onRender} = useProfilerCallback();
+
+  const reducer = useCallback((state, action) => {
     const prevState = [...state];
 
     const {type, rowIndex, colIndex, value} = action;
@@ -27,8 +31,9 @@ export default function App() {
         prevState[prevState.length] = newArr;
         return prevState;
       case 'add col':
-        prevState.map((item, index)=> {
-          prevState[index][item.length] = '';
+        const lastIndex = prevState[0].length;
+        prevState.map((_, index)=> {
+          prevState[index][lastIndex] = '';
         })
         console.log('added col')
         return prevState;
@@ -36,15 +41,17 @@ export default function App() {
         console.log('wrong type');
         return prevState;
     }
-  }
+  }, [])
 
   const [data, setData] = useReducer(reducer, rawData);
 
   return (
-    <div className="App">
-      <Suspense fallback={<div className="loading"><img src = {loading} /></div>}>
-        <Table data = {data} setData = {setData} />
-      </Suspense>
-    </div>
+    <Profiler id = "App" onRender = {onRender} >
+      <div className="App">
+          <Suspense fallback={<div className="loading"><img src = {loading} /></div>}>
+            <Table data = {data} setData = {setData} />
+          </Suspense>
+      </div>
+    </Profiler>
   );
 }

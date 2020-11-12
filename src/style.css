@@ -67,3 +67,14 @@
   border: none;
   outline: none;
 }
+
+#showThePerf {
+  display: flex;
+  flex-flow: column nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 10rem;
+  background-color: crimson;
+}
